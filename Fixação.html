@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas-Renato A.</title>
+</head>
+<body>
+    <h1>Sistema de Gerenciamento de Notas</h1>
+    <p>Escolha um aluno e uma materia para calcular a média:</p>
+    <ul>
+        <li>Alunos: 0 - Asmodeus 1, 1 - Belial 2, 2 - Behemoth 3, 3 - Satanás 4, 4 - Lucifer 5</li>
+        <li>Disciplinas: 0 - LP, 1 - DJW, 2 - OSA</li>
+    </ul>
+    <button onclick="gerenciarNotas()">Calcular Notas</button>
+    <div id="resultado"></div>
+    (os nomes são assim porque alunos são um inferno de se lidar ent é)
+    <script>
+        // eu odeio fazer isso porfavor não passe mais eu imploro
+        const notas = [
+            [8, 7, 6],
+            [5, 6, 7],
+            [9, 8, 5],
+            [3, 4, 2],
+            [7, 5, 8],
+        ];
+        function gerenciarNotas() {
+            let continuar = true;
+
+            while (continuar) {
+            const aluno = parseInt(prompt("Escolha o aluno (0: Asmodeus 1, 1: Belial 2, 2: Behemoth 3, 3: Satanás 4, 4: Lúcifer 5):"));
+
+                if (aluno >= 0 && aluno < notas.length) {
+                    const disciplina = parseInt(prompt("Escolha a materia (0: LP, 1: DJW, 2: OSA):"));
+
+                    if (disciplina >= 0 && disciplina <= 2) {
+                        const nota = notas[aluno][disciplina];
+                        let categoria;
+
+                        switch (true) {
+                            case nota >= 6:
+                                categoria = "Passou 🤑😎";
+                                break;
+                            case nota >= 4 && nota < 6:
+                                categoria = "Recuperação, ficara sem ferias bruh";
+                                break;
+                            case nota < 4:
+                                categoria = "Reprovado lol ruimzão🤣";
+                                break;
+                        }
+                        document.getElementById("resultado").innerHTML = `
+                            <p>Aluno escolhido: D ${aluno + 1}</p>
+                            <p>Materia escolhida: ${disciplina === 0 ? "LP" : disciplina === 1 ? "DJW" : "OSA"}</p>
+                            <p>Nota: ${nota}</p>
+                            <p>Status: ${categoria}</p>
+                        `;
+                        continuar = confirm("Deseja consultar outro aluno ou disciplina?");
+                    } else {
+                        alert("Disciplina inválida. Tente novamente.");
+                    }
+                } else {
+                    alert("Aluno n encontrado");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
